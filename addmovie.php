@@ -4,6 +4,7 @@ if(!isset($_SESSION['admin'])){
     header('Location: login.php');
   }
 //comment pettina ra bhai
+//Nuvvu jaffa gadivi ra acha neat boy fresh boy ...
 
 ?>
 <!DOCTYPE html>
