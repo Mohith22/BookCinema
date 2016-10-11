@@ -111,11 +111,15 @@ if($username!='' ||$password!='' || $email!='' || $cpass!='' || $number!='' ){
     }
     else
     {
+      $psw= SHA1('$mypassword');
       $query = mysql_query("insert into userinfo(UserName, Password, EmailId , PhoneNumber) 
-        values ('$username', '$password', '$email' , '$number') ");
+
+        values ('$username', '$psw', '$email' , '$number') ");
       echo mysql_error();
 
+      if($query)
       echo "<br> <br> "."<b><p style='margin-left:220px;'> You Have Successfully Signed Up! <br> Happy Movie Booking NewBie!"."</p> </b>";
+    else echo "Mail ID already exists..";
     }
 }
 else

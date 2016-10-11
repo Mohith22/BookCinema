@@ -90,11 +90,11 @@ if(isset($_POST['submit'])){
 $myusername=$_POST['username']; 
 $mypassword=$_POST['password'];
 if($username!='' ||$password!='' ){ 
-
-
-$sql="SELECT * FROM userinfo WHERE UserName='$myusername' and Password='$mypassword'";
+$pw= SHA1('$mypassword');
+//echo $pw;
+$sql="SELECT * FROM userinfo WHERE EmailId='$myusername' and Password='$pw'";
 $result=mysql_query($sql);
-
+echo mysql_error();
 
 $count=mysql_num_rows($result);
 if($myusername == 'Admin' and $mypassword =='admin22')
@@ -106,7 +106,7 @@ if($myusername == 'Admin' and $mypassword =='admin22')
 if($count==1){
 
  $_SESSION['username'] = $myusername;
- $result = mysql_query("SELECT UserId FROM userinfo WHERE UserName='$myusername'");
+ $result = mysql_query("SELECT UserId FROM userinfo WHERE EmailId='$myusername'");
  $row = mysql_fetch_row($result);
  $_SESSION['id'] = $row[0];
 header("location:user.php");
