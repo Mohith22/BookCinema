@@ -42,10 +42,24 @@
       <a class="navbar-brand" href="#">BOOK MOVIE</a>
     </div>
        <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-       <li><a href="home.php">Movies</a></li>
+       <?php
+       if(!isset($_SESSION['id']))
+       { 
+       echo '<li><a href="home.php">Movies</a></li>
       <li><a href="signup.php">Sign Up</a></li>
       <li><a href="login.php">Login</a></li> 
-      <li class="active"><a href="contact.php">ContactUs</a></li> 
+      <li class="active"><a href="contact.php">ContactUs</a></li>';
+
+      }
+      else {
+              echo '<li> <a href="recom.php">Recommended</a></li>';
+        echo '<li class="active"><a href="home.php">Movies</a></li>';
+        echo '<li><a href="bookhis.php">BookingHistory</a></li>';
+      echo '<li><a href="logout.php">LogOut</a></li>'; 
+     echo '<li><a href="contact.php">ContactUs</a></li>';
+
+       } 
+      ?>
     </ul>
   </div>
 </nav>
@@ -63,7 +77,7 @@
 
   <div class="col-md-3"> </div>
   <div class="col-md-6"> 
-  <form class="form-group" action="addmovie.php" method="post" enctype="multipart/form-data"> 
+  <form class="form-group" action="contact.php" method="post" enctype="multipart/form-data"> 
     <div class="form-group">
       <label >Name :</label>
       <input type="text" class="form-control" name="name">
@@ -98,8 +112,9 @@ $email=$_POST['email'];
 $msg = $_POST['msg'];
 if($name!='' && $email!='' && $msg!=''){ 
 
-mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ($name ,$email,$msg)");
+mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ('$name' ,'$email','$msg') ") or die(mysql_error());
 
+}
 }
 ?>
 

@@ -1,16 +1,15 @@
 <?php 
 session_start();
-if(!isset($_SESSION['id']))
-{
-  //session_destroy();
-  header("location: login.php");
-}
+if(!isset($_SESSION['admin'])){
+    header('Location: login.php');
+  }
+//comment pettina ra bhai
+
 ?>
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
-    <title> SPACE BLOGS </title>
+    <title> BOOK MOVIE </title>
    <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
@@ -43,15 +42,14 @@ if(!isset($_SESSION['id']))
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#">BOOK MOVIE</a>
+      <a class="navbar-brand" href="#">Queries</a>
     </div>
 
     <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-      <li class="active"><a href="user.php">Home</a></li>
-      <li><a href="home.php" name="blog" id="blog">BookMovie</a></li> 
-      <li><a href="recom.php">Recommended</a></li>
-      <li><a href="bookhis.php">BookingHistory</a></li>
-      <li><a href="logout.php">LogOut</a></li> 
+      <li><a href="admin.php">Home</a></li>
+      <li><a href="addmovie.php">Add Movie</a></li>
+      <li class="active"><a href="query.php">Queries</a></li>  
+      <li><a href="logout.php">LogOut</a></li>
     </ul>
   </div>
 </nav>
@@ -60,18 +58,32 @@ if(!isset($_SESSION['id']))
  <br>
  <br>
  <br>
- 
- <div class="container">
-  <b><p class="about"> Welcome <?php
-  echo $_SESSION['name']." ...."; ?> </p> </b>
-  </div>
-  <br>
-  <br>
-<div class="container">
-  
-</div>
+
+    <?php 
+    $connection = mysql_connect("localhost", "root", ""); // Establishing Connection with Server
+    $db = mysql_select_db("BookMovie", $connection);
+
+      $result = mysql_query("SELECT * FROM query") or die(mysql_error());
+    while ($row = mysql_fetch_array($result)) {
+  echo '<div class="row">';
+  echo '<div class="col-md-2" > </div>';
+  echo '<div class="col-md-7">';
+  echo "<div class='panel panel-primary '>";
+  echo " <div class='panel-body'>";
+  echo "<br>";
+  echo "<b><h1>".$row['Name']."</h1></b>"."<br> ";
+  echo "</a>";
+  echo "<b><p class='about1'>".$row['Email']."</p></b>";
+  echo "<b><p class='about1'>".$row['Message']."</p></b>";
+  echo "</div> </div> </div>";
+  echo "<br><br><br><br>";
+  echo "</div>";
+  echo '<div class="col-md-2"> </div>';
+
+}
+    ?>
+
  
     </body>
 
 </html>
-
