@@ -67,7 +67,7 @@
       <h2 class="form-signin-heading">Login</h2>
       <br>
        
-      <input type="text" class="form-control" name="username" placeholder="UserName" />
+      <input type="text" class="form-control" name="username" placeholder="Email" />
        <br>
         
       <input type="password" class="form-control" name="password" placeholder="Password" />      
@@ -90,7 +90,7 @@ if(isset($_POST['submit'])){
 $myusername=$_POST['username']; 
 $mypassword=$_POST['password'];
 if($username!='' ||$password!='' ){ 
-$pw= SHA1('$mypassword');
+$pw= MD5($mypassword);
 //echo $pw;
 $sql="SELECT * FROM userinfo WHERE EmailId='$myusername' and Password='$pw'";
 $result=mysql_query($sql);

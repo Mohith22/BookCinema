@@ -111,7 +111,9 @@ if($username!='' ||$password!='' || $email!='' || $cpass!='' || $number!='' ){
     }
     else
     {
-      $psw= SHA1('$mypassword');
+      //echo $password;
+      $psw= MD5($password);
+      //echo "$psw";
       $query = mysql_query("insert into userinfo(UserName, Password, EmailId , PhoneNumber) 
 
         values ('$username', '$psw', '$email' , '$number') ");
