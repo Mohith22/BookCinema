@@ -87,8 +87,12 @@ mysql_select_db("$db_name")or die("cannot select DB");
 
 
 if(isset($_POST['submit'])){ 
+
 $myusername=$_POST['username']; 
 $mypassword=$_POST['password'];
+$name = mysql_query("SELECT * FROM userinfo WHERE EmailId = '$myusername '") or die(mysql_error()) ;
+$row = mysql_fetch_array($name);
+$_SESSION['name'] = $row['UserName'] ;
 if($username!='' ||$password!='' ){ 
 $pw= MD5($mypassword);
 //echo $pw;

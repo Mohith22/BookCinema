@@ -63,7 +63,7 @@ if(!isset($_SESSION['id']))
  
  <div class="container">
   <b><p class="about"> Welcome <?php
-  echo $_SESSION['username']." ...."; ?> </p> </b>
+  echo $_SESSION['name']." ...."; ?> </p> </b>
   </div>
   <br>
   <br>
