@@ -27,7 +27,8 @@ if(!isset($_SESSION['id']))
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <link rel="stylesheet" type="text/css" href="style_sheet.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
   </head>
 
@@ -73,9 +74,71 @@ if(!isset($_SESSION['id']))
 
   <b><p class="about" align="center">Your Booking History</p></b>
   
-  
+  <div class="clear"> </div>
+  <div id="BlogsBody">    
+      <div class="clear"> </div>
 
+  <script>
+    var userid = <?php echo $_SESSION['id']; ?>;
+      $(document).ready(function(){
+        //$("#logout").hide();
+        loadHis(userid);  
+      });
   
+      function trim(str){
+          var str=str.replace(/^\s+|\s+$/,'');
+          return str;
+      }
+
+
+
+        function fillHis(datas) {
+            $("#BlogsBody").empty();
+            var row='<div class="class="w3-container" align="center">';
+            $.each(JSON.parse(datas), function(i, data) {
+
+                var movieid = data.MovieId;
+                var seats = data.Seat;
+                var name=data.MovieName;
+
+
+                       row=row + '<div class="w3-card-12" style="width:50%">'+
+                      '<img  src="pic.jpg" alt="Card image cap" width="400px" height="400px ">'+
+                        '<div class="w3-container w3-center">'+
+                          '<h><b>'+name+'</b></h>'+
+                          '<p>'+seats+'</p>'+
+                        
+                        
+                      '</div>'+
+                  '</div>'+
+                  '<div class="clear"> </div></br>';
+      
+                
+            });
+            row=row+'</div>'
+
+             
+
+
+            $("#BlogsBody").append(row);
+        };
+
+      function loadHis(userid){
+            $.ajax({
+                  url : "loadhis.php",
+                  type: "POST",
+                  context: document.body,
+                  data: {userid: userid},
+                  success: function(data)
+                  {   
+                          fillHis(data);
+              },
+
+              });
+      }
+
+
+    </script>
 
 
  
