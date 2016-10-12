@@ -44,8 +44,8 @@
        <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
        <li><a href="home.php">Movies</a></li>
       <li><a href="signup.php">Sign Up</a></li>
-      <li class="active"><a href="login.php">Login</a></li> 
-      <li><a href="contact.php">ContactUs</a></li> 
+      <li><a href="login.php">Login</a></li> 
+      <li class="active"><a href="contact.php">ContactUs</a></li> 
     </ul>
   </div>
 </nav>
@@ -56,25 +56,31 @@
  <br>
  <br>
 
-  <b><p class="about" align="center"> Book Your Movie Here </p></b>
+  <b><p class="about" align="center"> ContactUs</p></b>
   
   <br>
   <br>
-   <div class="row">
-      <div class="col-md-2" ></div>
-      <div class="col-md-8" >    <div class="wrapper">
-    <form class="form-signin" action="login.php" method="post">       
-      <h2 class="form-signin-heading">Login</h2>
-      <br>
-       
-      <input type="text" class="form-control" name="username" placeholder="UserName" />
-       <br>
-        
-      <input type="password" class="form-control" name="password" placeholder="Password" />      
-      <br>
-       
-      <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Login</button>   
+
+  <div class="col-md-3"> </div>
+  <div class="col-md-6"> 
+  <form class="form-group" action="addmovie.php" method="post" enctype="multipart/form-data"> 
+    <div class="form-group">
+      <label >Name :</label>
+      <input type="text" class="form-control" name="name">
+    </div>
+    <div class="form-group">
+      <label >Email :</label>
+      <input type="email" class="form-control" name="email">
+    </div>
+    <div class="form-group">
+      <label >What do you want to say us? :</label>
+      <textarea rows="10" class="form-control" name="msg"></textarea>
+    </div>
+    <button class="btn-primary " type="submit" name="submit">Submit</button> 
     </form>
+    </div>
+<div class="col-md-3"> </div>
+
 <?php
 
 $host="localhost";
@@ -87,42 +93,16 @@ mysql_select_db("$db_name")or die("cannot select DB");
 
 
 if(isset($_POST['submit'])){ 
-$myusername=$_POST['username']; 
-$mypassword=$_POST['password'];
-if($username!='' ||$password!='' ){ 
-$pw= SHA1('$mypassword');
-//echo $pw;
-$sql="SELECT * FROM userinfo WHERE EmailId='$myusername' and Password='$pw'";
-$result=mysql_query($sql);
-echo mysql_error();
+$name=$_POST['name']; 
+$email=$_POST['email'];
+$msg = $_POST['msg'];
+if($name!='' && $email!='' && $msg!=''){ 
 
-$count=mysql_num_rows($result);
-if($myusername == 'Admin' and $mypassword =='admin22')
-{
-  header("location:admin.php");
-  $_SESSION['admin'] = $myusername;
-  break;
-}
-if($count==1){
+mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ($name ,$email,$msg)");
 
- $_SESSION['username'] = $myusername;
- $result = mysql_query("SELECT UserId FROM userinfo WHERE EmailId='$myusername'");
- $row = mysql_fetch_row($result);
- $_SESSION['id'] = $row[0];
-header("location:user.php");
-}
-else {
-echo " <br> <br> <b>Wrong Username or Password</b>";
-}
-}
 }
 ?>
-  </div></div>
 
-
-  </div></div>
-      <div class="col-md-2" ></div>
-    </div>
 
 
 

@@ -1,9 +1,41 @@
 <?php
+  $connection = mysql_connect("localhost", "root", ""); // Establishing Connection with Server
+$db = mysql_select_db("BookMovie", $connection); // Selecting Database from Server
 session_start();
+mysql_query("DELETE FROM interest ") or die('Unable to run query:');
 if(!isset($_SESSION['id']))
 {
   header('Location: login.php');
 }
+
+
+
+$result = mysql_query("SELECT * FROM (movieinfo, (SELECT UserId,SUM(Action) AS Action ,AVG(Comedy) AS Comedy,AVG(Romance) AS Romance,AVG(Horror) AS Horror,AVG(SciFi) AS SciFi FROM userinterest GROUP BY UserId ) AS T) ") or die(mysql_error()) ;
+
+$counter = mysql_num_rows($result);
+
+if($counter>0){
+while($row = mysql_fetch_array($result))
+{
+$userid = $row['UserId'];
+$movieid = $row['MovieId'];
+$act = $row['Action']; 
+$com = $row['Comedy'];
+$rom = $row['Romance'];
+$hor = $row['Horror'];
+$sci = $row['SciFi'];
+$iact =  $row['M_Action'];
+$icom = $row['M_Comedy'];
+$irom = $row['M_Romance'];
+$ihor = $row['M_Horror'];
+$isci = $row['M_SciFi'];
+
+$val = $act * $iact + $com * $icom + $rom * $irom + $hor * $ihor + $sci * $isci;
+
+mysql_query("INSERT INTO interest(UserId,MovieId,IntValue) VALUES($userid , $movieid ,$val)");
+}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -83,16 +115,19 @@ if(!isset($_SESSION['id']))
     <div class="container">
   <?php
   $connection = mysql_connect("localhost", "root", ""); // Establishing Connection with Server
-$db = mysql_select_db("BookMovie", $connection); // Selecting Database from Server 
-$result = mysql_query("SELECT * FROM movieinfo ") or die('Unable to run query:');
+$db = mysql_select_db("BookMovie", $connection); // Selecting Database from Server
+$id = $_SESSION['id']; 
+$result = mysql_query("SELECT * FROM interest NATURAL JOIN movieinfo WHERE UserId =$id ORDER BY IntValue DESC ") or die('Unable to run query:');
 
 $counter = mysql_num_rows($result);
-
+$counter2 = 5; // Number of films to be recommended
 echo "<div class='col-md-1'> </div>";
 
 echo "<div class='col-md-7'> ";
 if ($counter > 0) {
-while ($row = mysql_fetch_array($result)) {
+while ($row = mysql_fetch_array($result) ) {
+
+  if($counter2!=0){
   echo "<a href='movie.php?movieid=".$row['MovieId']."'>";
   echo " <div class='thumbnail'>";
   echo "<br>";
@@ -103,7 +138,7 @@ while ($row = mysql_fetch_array($result)) {
   echo "<br><br>";
 
   echo "</div>";
-
+  $counter2--;}
 }
 
 }
