@@ -222,6 +222,8 @@ function myfun(){
   });  }
 
     function buyfun(){
+      var r = confirm("Do Want to Book the Below Seats?");
+      if(r==1){
       var nodes=$cart[0].childNodes
       var p=seats;
       var seatnumber="";
@@ -236,7 +238,7 @@ function myfun(){
               }
               modifystr(mp,seatnumber);
       //alert(nodes[0];  
-        
+        }
     }
 
     function modifystr(s,seatnumber){
