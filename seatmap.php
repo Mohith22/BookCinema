@@ -251,7 +251,8 @@ function myfun(){
       //map=mp.Map;
       //window.alert(map);
           location.reload();
-      //window.alert(mp);
+          alert("success");
+          window.location.href = 'bookhis.php'; 
 
           },
 
