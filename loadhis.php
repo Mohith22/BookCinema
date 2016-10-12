@@ -7,7 +7,7 @@ $db = mysql_select_db("BookMovie", $conn); // Selecting Database from Server
    }else{
 				$userid = $_POST['userid'];
 
-						$query = mysql_query("select * from (tickets natural join movieinfo) where tickets.UserId = $userid order by tickets.TicketId desc ") ;
+						$query = mysql_query("SELECT * from tickets natural join movieinfo where tickets.UserId = $userid order by tickets.TicketId desc ") or die(mysql_error());
  						//echo mysql_error();
 					    $emparray = array();
 					    while($row =mysql_fetch_assoc($query))
@@ -16,6 +16,6 @@ $db = mysql_select_db("BookMovie", $conn); // Selecting Database from Server
 					    }
 		mysql_close($conn);
 		
-		//echo json_encode($emparray);
+		echo json_encode($emparray);
 	}
 ?>
