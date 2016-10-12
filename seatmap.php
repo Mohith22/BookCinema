@@ -90,11 +90,11 @@ echo '<div class="col-md-3"> </div>
     <br>
     <br>
     <div class="booking-details">
-      <p class="about4">Movie: <span> '.$row['MovieName'].'</span></p>
-      <p class="about4">Seat: </p>
+      <p class="about1">Movie: <span> '.$row['MovieName'].'</span></p>
+      <p class="about1">Seat: </p>
       <ul id="selected-seats"></ul>
-      <p class="about4">Tickets: <span id="counter">0</span></p>
-      <p class="about4">Total: <b>$<span id="total">0</span></b></p>
+      <p class="about1">Tickets: <span id="counter">0</span></p>
+      <p class="about1">Total: <b>$<span id="total">0</span></b></p>
           
       <button class="btn btn-info"  onclick="buyfun()">BUY</button>
           
@@ -235,7 +235,7 @@ function myfun(){
         //alert(mp);
               }
               modifystr(mp,seatnumber);
-      //alert(nodes[0];
+      //alert(nodes[0];  
         
     }
 

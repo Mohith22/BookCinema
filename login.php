@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title> SPACE BLOGS </title>
+    <title> BOOK MOVIE </title>
    <meta charset="utf-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
