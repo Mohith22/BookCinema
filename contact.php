@@ -101,6 +101,7 @@ if($name!='' && $email!='' && $msg!=''){
 mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ($name ,$email,$msg)");
 
 }
+}
 ?>
 
 
