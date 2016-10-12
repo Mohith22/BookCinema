@@ -97,13 +97,12 @@ if(!isset($_SESSION['id']))
             var row='<div class="class="w3-container" align="center">';
             $.each(JSON.parse(datas), function(i, data) {
 
-                var movieid = data.MovieId;
+                //var pic = data.MoviePoster;
                 var seats = data.Seat;
                 var name=data.MovieName;
 
 
                        row=row + '<div class="w3-card-12" style="width:50%">'+
-                      '<img  src="pic.jpg" alt="Card image cap" width="400px" height="400px ">'+
                         '<div class="w3-container w3-center">'+
                           '<h><b>'+name+'</b></h>'+
                           '<p>'+seats+'</p>'+
