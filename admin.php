@@ -1,4 +1,11 @@
+<?php 
+session_start();
+if(!isset($_SESSION['admin'])){
+    header('Location: login.php');
+  }
+//comment pettina ra bhai
 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
