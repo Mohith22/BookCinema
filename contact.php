@@ -77,7 +77,7 @@
 
   <div class="col-md-3"> </div>
   <div class="col-md-6"> 
-  <form class="form-group" action="addmovie.php" method="post" enctype="multipart/form-data"> 
+  <form class="form-group" action="contact.php" method="post" enctype="multipart/form-data"> 
     <div class="form-group">
       <label >Name :</label>
       <input type="text" class="form-control" name="name">
@@ -112,7 +112,7 @@ $email=$_POST['email'];
 $msg = $_POST['msg'];
 if($name!='' && $email!='' && $msg!=''){ 
 
-mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ($name ,$email,$msg)");
+mysql_query("INSERT INTO query(Name , Email ,Message) VALUES ('$name' ,'$email','$msg') ") or die(mysql_error());
 
 }
 }
